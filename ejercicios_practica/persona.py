@@ -53,6 +53,22 @@ def report(limit=0, offset=0):
 
     return json_result_list
 
+def dashboard():
+        # Para eso, su función "dashboard" debe devolver dos valores:
+        # - El primer valor que debe devolver es "x", que debe ser
+        # los Ids de todas las personas en su base de datos
+        # - El segundo valor que debe devolver es "y", que deben ser
+        # todas las edades respectivas a los Ids que se encuentran en "x"
+    x = []
+    y = []
+    
+    query = db.session.query(Persona)
+
+    for i in query:
+        x.append(i.id)
+        y.append(i.age)
+    
+    return x, y
 
 if __name__ == "__main__":
     print("Test del modulo heart.py")
@@ -72,6 +88,10 @@ if __name__ == "__main__":
 
     # Aquí se puede ensayar todo lo que necesitemos con nuestra DB
     # ...
+    insert(name="Laura", age="28")
+    insert(name="Renzo", age="24")
+    datos = report()
+    print(datos)
 
     db.session.remove()
     db.drop_all()
